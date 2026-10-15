@@ -1,0 +1,42 @@
+package com.vishra.job.security;
+
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Service
+public class JwtProvider {
+    private final SecretKey jwtSecretKey = Keys.hmacShaKeyFor(JwtConstant.JWT_SECRET_KEY.getBytes());
+
+    public String genrateToken(Authentication authentication,Long userId) {
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        String role = populateAuthorities(authorities);
+
+        return Jwts.builder()
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day expiration
+                .claim("email",authentication.getName())
+                .claim("authorities", role)
+                .claim("userId",userId)
+                .signWith(jwtSecretKey)
+                .compact();
+    }
+
+    private String populateAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        Set<String> auth = new HashSet<>();
+        for (GrantedAuthority authority : authorities) {
+            auth.add(authority.getAuthority());
+        }
+            return String.join(",", auth);
+
+    }
+}

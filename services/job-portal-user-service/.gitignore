@@ -1,0 +1,61 @@
+# ---------- Secrets ----------
+.env
+.env.*
+*.env
+!.env.example
+!*.env.example
+
+application-local.yml
+application-local.properties
+
+*.pem
+*.key
+*.p12
+*.jks
+credentials.json
+kubeconfig
+
+# K8s secret files (example file push ho sakti hai)
+**/*-secret.yaml
+**/*-secret.yml
+!**/*-secret.example.yaml
+
+# ---------- Build output ----------
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+dependency-reduced-pom.xml
+
+# ---------- IDE ----------
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+
+# ---------- OS / Logs / Temp ----------
+.DS_Store
+Thumbs.db
+*.log
+logs/
+*.tmp
+*.swp
+*.bak
+HELP.md
+
+# ---------- Docker (local only) ----------
+docker-compose.override.yml
