@@ -1,9 +1,7 @@
 package com.vishra.job.dto.response;
 
-import com.vishra.job.domain.ExperienceLevel;
-import com.vishra.job.domain.JobStatus;
-import com.vishra.job.domain.JobType;
-import com.vishra.job.domain.WorkMode;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.vishra.job.domain.*;
 import com.vishra.job.dto.JobCategoryResponse;
 import com.vishra.job.dto.JobSkillResponse;
 import lombok.*;
@@ -26,7 +24,7 @@ public class JobResponse {
     private String responsibilities;
     private String benefits;
 
-    private com.zosh.job.common.dto.response.CompanySummaryResponse company;
+    private CompanySummaryResponse company;
     private Long employerId;
     private JobCategoryResponse jobCategory;
     private Set<JobSkillResponse> jobSkillResponses;
@@ -60,5 +58,29 @@ public class JobResponse {
     private LocalDateTime closedAt;
 
 
+    /**
+     * Lightweight company card response.
+     * Embedded inside JobResponse/JobSummaryResponse so other services
+     * can show company info without a separate Feign call.
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class CompanySummaryResponse {
 
+        private Long id;
+        private String name;
+        private String slug;
+        private String logoUrl;
+        private String tagline;
+        private IndustryType industryType;
+        private CompanySize companySize;
+        private Boolean verified;
+
+        /** HQ city and country for display on job cards. */
+        private String city;
+        private String country;
+    }
 }

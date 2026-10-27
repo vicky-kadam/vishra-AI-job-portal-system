@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 public class PersonalInfoResponse {
     private String firstName;
-    private String LastName;
+    private String lastName;
     private String headLine;
 
     private String email;

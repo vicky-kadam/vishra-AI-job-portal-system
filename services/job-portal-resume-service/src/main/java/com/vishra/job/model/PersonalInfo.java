@@ -1,4 +1,4 @@
-package com.vishra.job.dto;
+package com.vishra.job.model;
 
 
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PersonalInfoResponse {
+public class PersonalInfo {
     private String firstName;
     private String lastName;
     private String headLine;

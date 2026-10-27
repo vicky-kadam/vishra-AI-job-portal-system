@@ -2,7 +2,6 @@ package com.vishra.job.service;
 
 import com.vishra.job.domain.JobStatus;
 import com.vishra.job.dto.request.JobRequest;
-import com.vishra.job.dto.response.CompanyResponse;
 import com.vishra.job.dto.response.JobResponse;
 import com.vishra.job.mapper.JobMapper;
 import com.vishra.job.model.Job;
@@ -92,8 +91,8 @@ public class JobServiceImpl implements JobService {
 
     private JobResponse convertToResponse(Job job) {
 
-        com.zosh.job.common.dto.response.CompanySummaryResponse companyResponse =
-                com.zosh.job.common.dto.response.CompanySummaryResponse.builder().build().builder()
+        JobResponse.CompanySummaryResponse companyResponse =
+                JobResponse.CompanySummaryResponse.builder().build().builder()
                         .id(job.getCompanyId())
                         .build();
 

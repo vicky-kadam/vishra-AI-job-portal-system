@@ -7,8 +7,6 @@ import com.vishra.job.dto.response.JobTagResponse;
 import com.vishra.job.model.Job;
 import com.vishra.job.model.embeddable.JobLocation;
 import com.vishra.job.model.embeddable.SalaryRange;
-import com.zosh.job.common.dto.response.CompanySummaryResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -34,7 +32,7 @@ public class JobMapper {
 
     public JobResponse toDto(
             Job job,
-            CompanySummaryResponse companyResponse
+            JobResponse.CompanySummaryResponse companyResponse
     ) {
         if (job == null) {
             return null;
