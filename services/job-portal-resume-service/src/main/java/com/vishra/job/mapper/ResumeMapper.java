@@ -1,13 +1,8 @@
 package com.vishra.job.mapper;
 
-import com.vishra.job.dto.PersonalInfoResponse;
-import com.vishra.job.dto.ResumeSkillResponse;
-import com.vishra.job.dto.WorkExperienceResponse;
+import com.vishra.job.dto.*;
 import com.vishra.job.dto.response.ResumeResponse;
-import com.vishra.job.model.PersonalInfo;
-import com.vishra.job.model.Resume;
-import com.vishra.job.model.ResumeSkill;
-import com.vishra.job.model.WorkExperience;
+import com.vishra.job.model.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,6 +25,22 @@ public class ResumeMapper {
 
 
 
+    }
+
+    public static ProjectResponse toProjectResponse(Project project) {
+        if (project == null) return null;
+        return ProjectResponse.builder()
+                .id(project.getId())
+                .title(project.getTitle())
+                .description(project.getDescription())
+                .technologies(project.getTechnologies())
+                .projectUrl(project.getProjectUrl())
+                .sourceCodeUrl(project.getSourceCodeUrl())
+                .startDate(project.getStartDate())
+                .endDate(project.getEndDate())
+                .isOngoing(project.getIsOngoing())
+                .displayOrder(project.getDisplayOrder())
+                .build();
     }
 
     public ResumeResponse toResumeResponse(Resume resume){
@@ -81,6 +92,24 @@ public class ResumeMapper {
                 .displayOrder(skill.getDisplayOrder())
                 .build();
     }
+
+    public static EducationResponse toEducationResponse(Education edu) {
+        if (edu == null) return null;
+        return EducationResponse.builder()
+                .id(edu.getId())
+                .institutionName(edu.getInstitutionName())
+                .degree(edu.getDegree())
+                .fieldOfStudy(edu.getFieldOfStudy())
+                .grade(edu.getGrade())
+                .startDate(edu.getStartDate())
+                .endDate(edu.getEndDate())
+                .isCurrentlyStudying(edu.getIsCurrentlyStudying())
+                .description(edu.getDescription())
+                .displayOrder(edu.getDisplayOrder())
+                .build();
+    }
+
+
 
 
 }
