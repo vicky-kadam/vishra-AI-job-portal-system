@@ -1,12 +1,16 @@
 package com.vishra.job.mapper;
 
 import com.vishra.job.dto.ApplicationResponse;
+import com.vishra.job.dto.response.ApplicationNoteResponse;
 import com.vishra.job.dto.response.CompanyResponse;
 import com.vishra.job.dto.response.JobResponse;
 import com.vishra.job.dto.response.UserResponse;
 import com.vishra.job.entity.Application;
+import com.vishra.job.entity.ApplicationNotes;
 import com.vishra.job.payload.CreateApplicationRequest;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ApplicationMapper {
 
     private ApplicationMapper() {
@@ -53,6 +57,17 @@ public class ApplicationMapper {
                 .appliedAt(application.getAppliedAt())
                 .updatedAt(application.getUpdatedAt())
 //                .screening(toScreeningResponse(screening))
+                .build();
+    }
+
+
+    public ApplicationNoteResponse toNoteResponse(ApplicationNotes notes){
+        return ApplicationNoteResponse.builder()
+                .id(notes.getId())
+                .applicationId(notes.getApplication().getId())
+                .addedByUserId(notes.getAddedByUserId())
+                .content(notes.getContent())
+                .createdAt(notes.getCreatedAt())
                 .build();
     }
 }
