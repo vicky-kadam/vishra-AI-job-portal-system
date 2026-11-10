@@ -1,5 +1,6 @@
 package com.vishra.job.controller;
 
+import com.vishra.job.dto.response.ApiResponse;
 import com.vishra.job.dto.response.ApplicationNoteResponse;
 import com.vishra.job.exception.ApplicationException;
 import com.vishra.job.exception.ResourceNotFoundException;
@@ -29,10 +30,11 @@ public class ApplicationNoteController {
     }
 
     @DeleteMapping("/{noteId}")
-    public ResponseEntity<Void> deleteNote(@PathVariable Long applicationId, @PathVariable Long noteId, @RequestHeader("X-Use-Id") Long employerId) throws Exception {
+    public ResponseEntity<ApiResponse> deleteNote(@PathVariable Long applicationId, @PathVariable Long noteId, @RequestHeader("X-Use-Id") Long employerId) throws Exception {
         applicationNoteService.deleteNote(applicationId, noteId, employerId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new ApiResponse("ApplicationNote deleted successfully", true));
     }
+
 }
 
 

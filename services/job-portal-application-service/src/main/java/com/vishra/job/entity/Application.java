@@ -1,6 +1,6 @@
 package com.vishra.job.entity;
 
-import com.vishra.job.domain.AiShortListStatus;
+
 import com.vishra.job.domain.AiShortlistStatus;
 import com.vishra.job.domain.ApplicationStatus;
 import jakarta.persistence.*;
