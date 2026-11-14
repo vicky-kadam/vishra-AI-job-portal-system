@@ -1,9 +1,14 @@
 package com.vishra.job.service.impl;
 
+import com.vishra.job.client.CompanyClient;
+import com.vishra.job.client.JobClient;
+import com.vishra.job.client.ResumeClient;
+import com.vishra.job.client.UserClient;
 import com.vishra.job.domain.ApplicationStatus;
 import com.vishra.job.dto.ApplicationResponse;
 import com.vishra.job.dto.response.CompanyResponse;
 import com.vishra.job.dto.response.JobResponse;
+import com.vishra.job.dto.response.ResumeResponse;
 import com.vishra.job.dto.response.UserResponse;
 import com.vishra.job.entity.Application;
 import com.vishra.job.exception.ApplicationException;
@@ -28,6 +33,10 @@ import java.util.stream.Collectors;
 public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationRepository applicationRepository;
+    private final JobClient jobClient;
+    private final ResumeClient resumeClient;
+    private final CompanyClient companyClient;
+    private final UserClient userClient;
 
     @Override
     public ApplicationResponse createApplication(Long candidateId, CreateApplicationRequest req)
@@ -37,10 +46,13 @@ public class ApplicationServiceImpl implements ApplicationService {
             throw new ApplicationException("Application already exists");
         }
 
-        // TODO: fetch job (companyId aur employerId job se aayenge)
-        // TODO: fetch resume
-        Long companyId = 1L;   // temporary
-        Long employerId = 1L;  // temporary
+
+
+
+        JobResponse jobResponse = jobClient.getJobById(req.getJobId());
+        Long companyId = jobResponse.getCompany().getId();   // temporary
+        Long employerId = jobResponse.getEmployerId();
+        ResumeResponse resumeResponse = resumeClient.getResumeById(req.getResumeId(),employerId);// temporary
 
         Application application = ApplicationMapper.toEntity(req, candidateId, companyId, employerId);
         Application saved = applicationRepository.save(application);
@@ -73,10 +85,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 
     @Override
-    public List<ApplicationResponse> getApplicationsForCompany(Long companyId,
+    public List<ApplicationResponse> getApplicationsForCompany(Long userId,
                                                                CompanyApplicationFilterRequest filterRequest)
             throws ResourceNotFoundException {
-
+        Long companyId = companyClient.getMyCompany(userId).getId();
         Sort sort = builderSort(filterRequest.getSortBy());
 
         return applicationRepository
@@ -204,17 +216,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     public ApplicationResponse fullResponse(Application application) {
-        JobResponse job = JobResponse.builder()
-                .id(application.getJobId())
-                .build();
-
-        CompanyResponse companyResponse = CompanyResponse.builder()
-                .id(application.getCompanyId())
-                .build();
-
-        UserResponse userResponse = UserResponse.builder()
-                .id(application.getCandidateId())
-                .build();
+        JobResponse job = jobClient.getJobById(application.getJobId());
+        CompanyResponse companyResponse = companyClient.getCompanyById(application.getCompanyId());
+        UserResponse userResponse = userClient.getUserById(application.getCandidateId());
 
         return ApplicationMapper.toResponse(application, job, userResponse, companyResponse);
     }

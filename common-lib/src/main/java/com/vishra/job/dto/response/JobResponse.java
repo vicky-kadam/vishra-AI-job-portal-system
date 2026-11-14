@@ -24,7 +24,7 @@ public class JobResponse {
     private String responsibilities;
     private String benefits;
 
-    private CompanySummaryResponse company;
+    private CompanyResponse company;
     private Long employerId;
     private JobCategoryResponse jobCategory;
     private Set<JobSkillResponse> jobSkillResponses;

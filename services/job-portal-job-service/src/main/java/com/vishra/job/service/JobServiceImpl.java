@@ -1,7 +1,9 @@
 package com.vishra.job.service;
 
+import com.vishra.job.client.CompanyClient;
 import com.vishra.job.domain.JobStatus;
 import com.vishra.job.dto.request.JobRequest;
+import com.vishra.job.dto.response.CompanyResponse;
 import com.vishra.job.dto.response.JobResponse;
 import com.vishra.job.mapper.JobMapper;
 import com.vishra.job.model.Job;
@@ -32,6 +34,7 @@ public class JobServiceImpl implements JobService {
     private final  JobCategoryService  jobCategoryService;
     private final JobSkillService jobSkillService;
     private final JobTagService jobTagService;
+    private final CompanyClient companyClient;
 
     @Override
     public JobResponse createJob(Long employerId, JobRequest jobRequest) throws Exception {
@@ -43,8 +46,8 @@ public class JobServiceImpl implements JobService {
         Set<JobTag> tag = jobTagService.getJobTagByIds(jobRequest.getTagIds()) != null ?
                 jobTagService.getJobTagByIds(jobRequest.getTagIds())
                 : Collections.emptySet();
-        // TODO: Fetch company by ID
-        Long companyId = 1L;
+        CompanyResponse companyResponse = companyClient.getMyCompany(employerId);
+        Long companyId = companyResponse.getId();
 
         Job job = Job.builder()
                 .title(jobRequest.getTitle())
@@ -91,10 +94,7 @@ public class JobServiceImpl implements JobService {
 
     private JobResponse convertToResponse(Job job) {
 
-        JobResponse.CompanySummaryResponse companyResponse =
-                JobResponse.CompanySummaryResponse.builder().build().builder()
-                        .id(job.getCompanyId())
-                        .build();
+        CompanyResponse companyResponse = companyClient.getCompanyById(job.getCompanyId());
 
         return jobMapper.toDto(job, companyResponse);
     }
@@ -283,4 +283,5 @@ public class JobServiceImpl implements JobService {
         }
     }
 }
+
 

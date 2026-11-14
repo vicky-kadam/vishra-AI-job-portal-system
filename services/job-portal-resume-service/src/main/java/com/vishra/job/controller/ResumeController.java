@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/resumes")
+@RequestMapping("n")
 @RequiredArgsConstructor
 public class ResumeController {
     private final ResumeService resumeService;

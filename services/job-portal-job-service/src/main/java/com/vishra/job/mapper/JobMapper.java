@@ -1,7 +1,9 @@
 
 package com.vishra.job.mapper;
 
+import com.vishra.job.domain.CompanyType;
 import com.vishra.job.dto.JobSkillResponse;
+import com.vishra.job.dto.response.CompanyResponse;
 import com.vishra.job.dto.response.JobResponse;
 import com.vishra.job.dto.response.JobTagResponse;
 import com.vishra.job.model.Job;
@@ -32,7 +34,7 @@ public class JobMapper {
 
     public JobResponse toDto(
             Job job,
-            JobResponse.CompanySummaryResponse companyResponse
+            CompanyResponse companyResponse
     ) {
         if (job == null) {
             return null;
