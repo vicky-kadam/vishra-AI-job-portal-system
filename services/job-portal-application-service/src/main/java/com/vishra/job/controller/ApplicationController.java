@@ -120,12 +120,12 @@ public class ApplicationController {
     // ── Delete ────────────────────────────────────────────────────────────────
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteApplication(
+    public ResponseEntity<ApiResponse<?>> deleteApplication(
             @PathVariable Long id,
             @RequestHeader("X-User-Id") Long candidateId)
             throws ResourceNotFoundException, ApplicationException {
         applicationService.deleteApplication(id, candidateId);
-        return ResponseEntity.ok(new ApiResponse("Application deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<>("Application deleted successfully", true));
     }
 }
 

@@ -14,9 +14,9 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ResponseEntity<ApiResponse<A>> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiResponse(ex.getMessage(), false));
+                .body(new ApiResponse<A>(ex.getMessage(), false));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -30,9 +30,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGenericException(Exception ex) {
+    public ResponseEntity<ApiResponse<A>> handleGenericException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ApiResponse("An unexpected error occurred: " + ex.getMessage(), false));
+                .body(new ApiResponse<A>("An unexpected error occurred: " + ex.getMessage(), false));
     }
 }
 

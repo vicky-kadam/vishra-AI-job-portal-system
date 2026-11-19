@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,9 +39,9 @@ public class JobCategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteJobCategory(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<A>> deleteJobCategory(@PathVariable Long id) {
         jobCategoryService.deleteJobCategory(id);
-        return ResponseEntity.ok(new ApiResponse("category deleted successfully",true));
+        return ResponseEntity.ok(new ApiResponse<A>("category deleted successfully",true));
     }
 
 

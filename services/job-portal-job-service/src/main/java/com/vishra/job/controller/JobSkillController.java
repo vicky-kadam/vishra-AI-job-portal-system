@@ -2,17 +2,14 @@ package com.vishra.job.controller;
 
 import com.vishra.job.dto.JobSkillResponse;
 import com.vishra.job.dto.response.ApiResponse;
-import com.vishra.job.model.JobSkill;
 import com.vishra.job.payload.JobSkillRequest;
 import com.vishra.job.service.JobSkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/job-skills")
@@ -41,9 +38,9 @@ public class JobSkillController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteJobSkill(@PathVariable Long id) throws Exception {
+    public ResponseEntity<ApiResponse<A>> deleteJobSkill(@PathVariable Long id) throws Exception {
         jobSkillService.deleteJobSkill(id);
-        return ResponseEntity.ok(new ApiResponse("skill deleted successfully",true));
+        return ResponseEntity.ok(new ApiResponse<A>("skill deleted successfully",true));
     }
 
 //    @GetMapping("/ids")

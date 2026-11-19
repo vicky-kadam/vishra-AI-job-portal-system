@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class JobTagController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteJobTag(@PathVariable Long id) throws Exception {
+    public ResponseEntity<ApiResponse<A>> deleteJobTag(@PathVariable Long id) throws Exception {
         jobTagService.deleteJobTag(id);
         return ResponseEntity.ok(ApiResponse.builder().message("Job tag deleted successfully").build());
     }

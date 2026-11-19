@@ -30,9 +30,9 @@ public class ApplicationNoteController {
     }
 
     @DeleteMapping("/{noteId}")
-    public ResponseEntity<ApiResponse> deleteNote(@PathVariable Long applicationId, @PathVariable Long noteId, @RequestHeader("X-Use-Id") Long employerId) throws Exception {
+    public ResponseEntity<ApiResponse<A>> deleteNote(@PathVariable Long applicationId, @PathVariable Long noteId, @RequestHeader("X-Use-Id") Long employerId) throws Exception {
         applicationNoteService.deleteNote(applicationId, noteId, employerId);
-        return ResponseEntity.ok(new ApiResponse("ApplicationNote deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<A>("ApplicationNote deleted successfully", true));
     }
 
 }

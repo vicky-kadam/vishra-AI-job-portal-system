@@ -46,12 +46,12 @@ public class WorkExperienceController {
     }
 
     @DeleteMapping("/{experienceId}")
-    public ResponseEntity<ApiResponse> deleteWorkExperience(
+    public ResponseEntity<ApiResponse<A>> deleteWorkExperience(
             @PathVariable Long resumeId,
             @PathVariable Long experienceId,
             @RequestHeader("X-User-Id") Long candidateId) throws ResourceNotFoundException {
         workExperienceService.deleteWorkExperience(experienceId, resumeId, candidateId);
-        return ResponseEntity.ok(new ApiResponse("Work experience deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<A>("Work experience deleted successfully", true));
     }
 }
 

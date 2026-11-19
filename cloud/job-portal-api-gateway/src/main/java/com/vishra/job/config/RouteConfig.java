@@ -101,6 +101,14 @@ public class RouteConfig {
                 .before(this::jwtFilter)
                 .build();
     }
+    @Bean
+    public RouterFunction<ServerResponse> aiServiceRoutes(){
+        return GatewayRouterFunctions.route("ai-service-routes")
+                .route(RequestPredicates.path("/api/ai/**"), HandlerFunctions.http())
+                .filter(LoadBalancerFilterFunctions.lb("job-portal-ai-service"))
+                .before(this::jwtFilter)
+                .build();
+    }
 
 
     private ServerRequest jwtFilter(ServerRequest serverRequest){

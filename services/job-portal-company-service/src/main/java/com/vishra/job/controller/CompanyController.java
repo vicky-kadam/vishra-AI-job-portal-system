@@ -60,9 +60,9 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.deactivateCompany(id));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteCompany(@PathVariable Long id,@RequestHeader("X-User-Id") Long ownerId) throws Exception {
+    public ResponseEntity<ApiResponse<A>> deleteCompany(@PathVariable Long id, @RequestHeader("X-User-Id") Long ownerId) throws Exception {
         companyService.deleteCompany(id,ownerId);
-        return ResponseEntity.ok(new ApiResponse("Company deleted Successfully",true));
+        return ResponseEntity.ok(new ApiResponse<A>("Company deleted Successfully",true));
     }
 
 }

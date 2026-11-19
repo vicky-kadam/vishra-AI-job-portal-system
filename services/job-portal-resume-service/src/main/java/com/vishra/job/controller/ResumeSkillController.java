@@ -46,12 +46,12 @@ public class ResumeSkillController {
     }
 
     @DeleteMapping("/{skillId}")
-    public ResponseEntity<ApiResponse> deleteSkill(
+    public ResponseEntity<ApiResponse<A>> deleteSkill(
             @PathVariable Long resumeId,
             @PathVariable Long skillId,
             @RequestHeader("X-User-Id") Long candidateId) throws ResourceNotFoundException {
         resumeSkillService.deleteSkill(skillId, resumeId, candidateId);
-        return ResponseEntity.ok(new ApiResponse("Skill deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<A>("Skill deleted successfully", true));
     }
 }
 

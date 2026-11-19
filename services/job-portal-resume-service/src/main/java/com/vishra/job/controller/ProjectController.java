@@ -46,12 +46,12 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<ApiResponse> deleteProject(
+    public ResponseEntity<ApiResponse<A>> deleteProject(
             @PathVariable Long resumeId,
             @PathVariable Long projectId,
             @RequestHeader("X-User-Id") Long candidateId) throws ResourceNotFoundException {
         projectService.deleteProject(projectId, resumeId, candidateId);
-        return ResponseEntity.ok(new ApiResponse("Project deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<A>("Project deleted successfully", true));
     }
 }
 
