@@ -32,7 +32,7 @@
         <spring.boot.version>4.1.1</spring.boot.version>
         <spring.cloud.version>2025.1.2</spring.cloud.version>
         <jjwt.version>0.12.6</jjwt.version>
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
     </properties>
 
 
