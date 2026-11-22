@@ -1,12 +1,15 @@
 package com.vishra.job.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.AssertTrue;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
 public class ApiResponse<T> {
 
     private String message;
@@ -36,4 +39,6 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> error(String message) {
         return new ApiResponse<>(message, false, null);
     }
+
+
 }

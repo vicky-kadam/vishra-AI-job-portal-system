@@ -42,10 +42,10 @@ public class SavedJobController {
     }
 
     @DeleteMapping("/{savedJobId}")
-    public ResponseEntity<ApiResponse<A>> unsaveJob(
+    public ResponseEntity<ApiResponse<?>> unsaveJob(
             @PathVariable Long savedJobId,
             @RequestHeader("X-User-Id") Long candidateId) throws ResourceNotFoundException {
         savedJobService.unsaveJob(candidateId, savedJobId);
-        return ResponseEntity.ok(new ApiResponse<A>("Job removed from saved list", true));
+        return ResponseEntity.ok(new ApiResponse<>("Job removed from saved list", true));
     }
 }

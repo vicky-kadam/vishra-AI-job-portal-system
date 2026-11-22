@@ -169,7 +169,7 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<A>> deleteJob(
+    public ResponseEntity<ApiResponse<?>> deleteJob(
             @RequestHeader("X-User-Id") Long employerId,
             @PathVariable("id") Long jobId
     ) throws Exception {
@@ -177,7 +177,7 @@ public class JobController {
         jobService.deleteJob(jobId, employerId);
 
         return ResponseEntity.ok(
-                new ApiResponse<A>("Job deleted successfully", true)
+                new ApiResponse<>("Job deleted successfully", true)
         );
     }
 

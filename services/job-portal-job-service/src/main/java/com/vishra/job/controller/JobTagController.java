@@ -40,7 +40,7 @@ public class JobTagController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<A>> deleteJobTag(@PathVariable Long id) throws Exception {
+    public ResponseEntity<ApiResponse<?>> deleteJobTag(@PathVariable Long id) throws Exception {
         jobTagService.deleteJobTag(id);
         return ResponseEntity.ok(ApiResponse.builder().message("Job tag deleted successfully").build());
     }

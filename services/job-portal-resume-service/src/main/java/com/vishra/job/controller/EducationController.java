@@ -45,12 +45,12 @@ public class EducationController {
     }
 
     @DeleteMapping("/{educationId}")
-    public ResponseEntity<ApiResponse<A>> deleteEducation(
+    public ResponseEntity<ApiResponse<?>> deleteEducation(
             @PathVariable Long resumeId,
             @PathVariable Long educationId,
             @RequestHeader("X-User-Id") Long candidateId) throws ResourceNotFoundException {
         educationService.deleteEducation(educationId, resumeId, candidateId);
-        return ResponseEntity.ok(new ApiResponse<A>("Education deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse<>("Education deleted successfully", true));
     }
 
 }

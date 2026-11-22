@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CheckController {
     @GetMapping
-    public ApiResponse<A> CheckController(){
-        return new ApiResponse<A>("Applicaiton running successfully on 7003" + UserRole.ROLE_ADMIN, true);
+    public ApiResponse<?> CheckController(){
+        return new ApiResponse<>("Applicaiton running successfully on 7003" + UserRole.ROLE_ADMIN, true);
     }
 }
